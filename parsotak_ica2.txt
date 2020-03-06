@@ -1,0 +1,4 @@
+Maximum wind speed: 11.5357
+Minimum MSLP: 29.8218727
+Average Tempature: 59.747083076923076
+Median Dewpoint: 51.51786
