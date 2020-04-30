@@ -25,17 +25,13 @@ infile = '/wx/storage/halpea17/wx272/lab4/20151107_erai.nc'
 
 f = Dataset(infile, 'r')
 
-#split the string based on the delimiter
-
-dt = infile.split('/')[6].split('_')[0]
-
 #read in geo height contours from meters to decameters
 
 gpot = f['HGT_GDS0_ISBL'][0, 1, :, :] 
 
 #convert geo heights mb to dams
 
-gpot_h = gpot / 10
+gpot_h = gpot/10
 
 #Read in the wind u
 
@@ -81,7 +77,7 @@ ax = fig.add_axes([0.1,0.1,0.8,0.8])
 
 #Define basemap
 
-m = Basemap(projection = 'npstere', boundinglat = 20, lon_0 = 260, resolution = 'l', ax = ax)
+m = Basemap(projection = 'npstere', boundinglat = 20, lon_0 = 260, resolution = 'l')
 
 xi, yi = m(lon2d, lat2d)
 
@@ -97,23 +93,19 @@ m.drawmeridians(np.arange(0., 359., 20.), labels = [0, 0 ,0, 1], fontsize = 14)
 
 #Define range of wind speed to be plotted
 
-range_wind = np.arange(0, 151, 10)
-
-#tick marks
-
-cticks = np.arange(0, 151, 10)
+range_wind = np.arange(0, 150, 10)
 
 #Define the range of Geopotenital heights values 
 
-range_geop_H = np.arange(510, 601, 6)
+range_geop_H = np.arange(500, 610, 6)
 
 #Add contour fills wind speed values
 
-contour_windFill = m.contourf(xi, yi, win_kts, range_wind, cmap = 'Blues')# changing the color for the contours to show is not working properly
+contour_windFill = m.contourf(xi, yi, win_kts, range_wind, cbar = 'blue')# changing the color for the contours to show is not working properly
 
 #Add contour fills for geo heights values 500 mb
 
-contour_heightFill = m.contour(xi, yi, gpot_h, range_geop_H, cmap = 'rainbow')# changing the color for the contours to show is not working properly
+contour_heightFill = m.contour(xi, yi, gpot_h, range_geop_H, cbar = 'blue')# changing the color for the contours to show is not working properly
 
 #Label geo height contour lines #error: index 18 is out of bounds for size 18
 
